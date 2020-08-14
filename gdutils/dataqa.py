@@ -363,6 +363,101 @@ def compare_column_sums(
                                         (tup1[1] - tup2[1])), sums1, sums2))
 
 
+def has_missing_geometries(gdf: gpd.GeoDataFrame,
+                           threshold: Optional[float] = 0.0) -> bool:
+    """
+    Returns True if the given GeoDataFrame has missing geometries.
+
+    Parameters
+    ----------
+    gdf : gpd.GeoDataFrame
+        GeoDataFrame whose geometries are to be checked.
+    threshold : float, optional, default = ``0.0``
+        Percentage of rows that are allowed to have missing geometries.
+        e.g. ``threshold = 0.5`` means that the function returns True
+        if the number of missing geometries is greater than half of the
+        number of rows.
+
+    Returns
+    -------
+    bool
+        True if the given GeoDataFrame has missing geometries.
+
+    Raises
+    ------
+    KeyError
+        Raised if 'geometry' column is missing.
+
+    See Also
+    --------
+    dataqa.has_empty_geometries
+
+    Examples
+    --------
+    >>> from shapely.geometry import Point as Pt
+    >>> gdf = gpd.GeoDataFrame({'col'       : ['v1', 'v2', 'v3'], 
+    ...                         'geometry'  : [None, Pt(1, 2), Pt(2, 1)]})
+    >>> print(dataqa.has_missing_geometries(gdf))
+    # Check if gdf has missing geometries
+    True
+
+    >>> print(dataqa.has_missing_geometries(gdf, threshold=0.75))
+    # Check if more than 75% of the rows contain missing geometries
+    False
+
+    """
+    return (list(gdf['geometry'].isna()).count(True) >
+            len(gdf['geometry']) * threshold)
+
+
+def has_empty_geometries(gdf: gpd.GeoDataFrame,
+                         threshold: Optional[float] = 0.0) -> bool:
+    """
+    Returns True if the given GeoDataFrame has empty geometries.
+
+    Parameters
+    ----------
+    gdf : gpd.GeoDataFrame
+        GeoDataFrame whose geometries are to be checked.
+    threshold : float, optional, default = ``0.0``
+        Percentage of rows that are allowed to have empty geometries.
+        e.g. ``threshold = 0.5`` means that the function returns True
+        if the number of empty geometries is greater than half of the
+        number of rows.
+
+    Returns
+    -------
+    bool
+        True if the given GeoDataFrame has empty geometries.
+
+    Raises
+    ------
+    KeyError
+        Raised if 'geometry' column is missing.
+
+    See Also
+    --------
+    dataqa.has_missing_geometries
+
+    Examples
+    --------
+    >>> from shapely.geometry import Polygon as Pg
+    >>> from shapelygeometry import Point as Pt
+    >>> gdf = gpd.GeoDataFrame({'col'       : ['v1', 'v2', 'v3'], 
+    ...                         'geometry'  : [Pt(1, 2), Pg([]), Pt(2, 1)]})
+    >>> print(dataqa.has_empty_geometries(gdf))
+    # Check if gdf has empty geometries
+    True
+
+    >>> print(dataqa.has_empty_geometries(gdf, threshold=0.75))
+    # Check if more than 75% of the rows contain empty geometries
+    False
+
+    """
+    return (list(gdf['geometry'].is_empty).count(True) >
+            len(gdf['geometry']) * threshold)
+
+
 #########################################
 #                                       #
 #           Helper Definitions          #
@@ -379,4 +474,3 @@ def __can_compare(xs: Union[Set[Hashable], List[Hashable]],
         (xs is not None and ys is not None and isinstance(xs, type(ys)))
         and
         (not isinstance(xs, Hashable) and len(xs) > 0 and len(xs) == len(ys)))
-

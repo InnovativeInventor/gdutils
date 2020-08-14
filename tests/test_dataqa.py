@@ -11,6 +11,9 @@ import gdutils.datamine as dm
 import gdutils.extract as et
 import gdutils.dataqa as dq
 
+from shapely.geometry import Point as Pt
+from shapely.geometry import Polygon as Pg
+
 
 
 #########################################
@@ -265,3 +268,17 @@ def test_compare_column_sums():
                         mggg_sums, medsl_sums))
     assert set(results) == set(to_comp)
 
+def test_geometries():
+    missing_gdf = gpd.GeoDataFrame({'col': ['v1', 'v2', 'v3'], 
+                    'geometry'  : [None, Pt(1, 2), Pt(2, 1)]})
+    empty_gdf = gpd.GeoDataFrame({'col': ['v1', 'v2', 'v3'], 
+                    'geometry'  : [Pt(1, 2), Pg([]), Pt(2, 1)]})
+    
+    assert dq.has_missing_geometries(missing_gdf)
+    assert not dq.has_missing_geometries(missing_gdf, threshold=0.75)
+    assert dq.has_missing_geometries(missing_gdf, threshold=0.1)
+
+    assert dq.has_empty_geometries(empty_gdf)
+    assert not dq.has_empty_geometries(empty_gdf, threshold=0.5)
+    assert dq.has_empty_geometries(empty_gdf, threshold=0.1)
+    
