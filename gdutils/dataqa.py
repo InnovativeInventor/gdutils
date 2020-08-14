@@ -10,8 +10,8 @@ Metadata
 :Module:        ``gdutils.dataqa``
 :Filename:      `dataqa.py <https://github.com/keiferc/gdutils/>`_
 :Author:        `@KeiferC <https://github.com/keiferc>`_
-:Date:          17 July 2020
-:Version:       0.0.1
+:Date:          14 August 2020
+:Version:       1.0.0
 :Description:   Module for data QA
 :Dependencies:  
 
@@ -456,6 +456,7 @@ def has_empty_geometries(gdf: gpd.GeoDataFrame,
     """
     return (list(gdf['geometry'].is_empty).count(True) >
             len(gdf['geometry']) * threshold)
+
 
 
 #########################################

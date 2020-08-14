@@ -11,7 +11,7 @@ Metadata
 :Filename:      `datamine.py <https://github.com/keiferc/gdutils/>`_
 :Author:        `@KeiferC <https://github.com/keiferc>`_
 :Date:          27 July 2020
-:Version:       0.0.1
+:Version:       1.0.0
 :Description:   Module for data mining
 
 Documentation

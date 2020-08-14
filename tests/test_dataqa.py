@@ -268,6 +268,7 @@ def test_compare_column_sums():
                         mggg_sums, medsl_sums))
     assert set(results) == set(to_comp)
 
+
 def test_geometries():
     missing_gdf = gpd.GeoDataFrame({'col': ['v1', 'v2', 'v3'], 
                     'geometry'  : [None, Pt(1, 2), Pt(2, 1)]})
