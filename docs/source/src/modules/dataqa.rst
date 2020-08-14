@@ -21,3 +21,12 @@ dataqa.compare_column_sums
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autofunction:: gdutils.dataqa.compare_column_sums
 
+dataqa.has_missing_geometries
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. autofunction:: gdutils.dataqa.has_missing_geometries
+
+dataqa.has_empty_geometries
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. autofunction:: gdutils.dataqa.has_empty_geometries
+
+
