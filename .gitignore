@@ -34,6 +34,7 @@ scripts/**/*.git
 # Docs
 docs/**/gdutils/
 docs/build/
+docs/**/examples/outputs/
 
 docs/source/src/examples/*
 !docs/source/src/examples/*.ipynb
