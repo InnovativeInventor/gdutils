@@ -1,7 +1,7 @@
-# Geodata Utility Tools
+# gdutils
 [![Documentation Status](https://readthedocs.org/projects/gdutils/badge/?version=latest)](https://gdutils.readthedocs.io/en/latest/?badge=latest)
 
-A collection of geodata utility tools. Still in development.
+A collection of geodata utility tools.
 
 Available modules:
 
