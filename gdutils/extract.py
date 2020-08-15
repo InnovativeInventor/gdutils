@@ -17,7 +17,7 @@ Provides
 Metadata
 --------
 :Module:        ``gdutils.extract``
-:Filename:      `extract.py <https://github.com/keiferc/gdutils>`_
+:Filename:      `extract.py <https://github.com/mggg/gdutils>`_
 :Author:        `@KeiferC <https://github.com/keiferc>`_
 :Date:          06 July 2020
 :Version:       1.0.0

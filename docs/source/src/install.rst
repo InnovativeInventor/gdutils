@@ -4,7 +4,7 @@ Installation Guide
 To install ``gdutils`` package, run the following ``pip`` command:
 ::
 
-    $ pip install git+https://github.com/KeiferC/gdutils.git
+    $ pip install git+https://github.com/mggg/gdutils.git
 
 
 Manual Installation
@@ -14,7 +14,7 @@ To manually install ``gdutils`` package, clone the repository with the
 following command:
 ::
 
-    $ git clone https://github.com/KeiferC/gdutils.git
+    $ git clone https://github.com/mggg/gdutils.git
 
 To install the dependecies and a local ``gdutils`` build, run the
 following commands:

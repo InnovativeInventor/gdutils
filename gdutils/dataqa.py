@@ -8,11 +8,11 @@ Provides
 Metadata
 --------
 :Module:        ``gdutils.dataqa``
-:Filename:      `dataqa.py <https://github.com/keiferc/gdutils/>`_
+:Filename:      `dataqa.py <https://github.com/mggg/gdutils/>`_
 :Author:        `@KeiferC <https://github.com/keiferc>`_
 :Date:          14 August 2020
 :Version:       1.0.0
-:Description:   Module for data QA
+:Description:   Module for data quality assurance
 :Dependencies:  
 
                 - ``geopandas``

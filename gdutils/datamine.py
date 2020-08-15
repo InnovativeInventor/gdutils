@@ -8,7 +8,7 @@ Provides
 Metadata
 --------
 :Module:        ``gdutils.datamine``
-:Filename:      `datamine.py <https://github.com/keiferc/gdutils/>`_
+:Filename:      `datamine.py <https://github.com/mggg/gdutils/>`_
 :Author:        `@KeiferC <https://github.com/keiferc>`_
 :Date:          27 July 2020
 :Version:       1.0.0

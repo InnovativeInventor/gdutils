@@ -14,7 +14,7 @@ Available modules:
 
 ## Installation
 ```bash
-$ pip install git+https://github.com/KeiferC/gdutils.git
+$ pip install git+https://github.com/mggg/gdutils.git
 ```
 
 To uninstall, run `pip uninstall gdutils`.
