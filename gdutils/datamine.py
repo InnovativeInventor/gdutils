@@ -30,15 +30,13 @@ Additionally, documentation can be found on `Read the Docs
 import json
 import os
 import pathlib
-import requests
 import subprocess
 import sys
 import urllib.parse
+from typing import (Dict, Hashable, Iterable, List, NoReturn, Optional, Tuple,
+                    Union)
 
-from typing import (Dict, Hashable, Iterable, List, NoReturn, 
-                    Optional, Tuple, Union)
-
-
+import requests
 
 #########################################
 #                                       #
@@ -377,7 +375,8 @@ def get_keys_by_category(dictionary: Dict[Hashable, List[Iterable]],
 
 def __generate_clone_cmds(
         repos: Optional[Union[Dict[str, str], List[str]]] = None,
-        dirpath: Optional[Union[str, pathlib.Path]] = None
+        dirpath: Optional[Union[str, pathlib.Path]] = None,
+        shallow = True
         ) -> List[str]:
     """
     Given a list of repos, returns a list of subprocess-valid 
@@ -398,6 +397,12 @@ def __generate_clone_cmds(
     if dirpath is not None:
         [cmd.append(os.path.join(dirpath, __get_repo_name(cmd[2]))) 
             for cmd in cmds]
+
+    if shallow:
+        [cmd.extend(["--depth", "1"]) for cmd in cmds]
+
+        # switch over to this once main becomes the default branch
+        # [cmd.extend(["--depth", "1", "--branch", "main", "--single-branch")] 
 
     return cmds
     
