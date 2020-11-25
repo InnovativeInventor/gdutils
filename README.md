@@ -12,8 +12,14 @@ Available modules:
    data for data science (data wrangling) purposes. A user-friendly, lite 
    wrapper of `geopandas` with the power of `pandas`.
 
+## Requirements
+- Python3
+- pip3
+- conda
+
 ## Installation
 ```bash
+$ conda install fiona shapely pyproj rtree
 $ pip install git+https://github.com/mggg/gdutils.git
 ```
 
