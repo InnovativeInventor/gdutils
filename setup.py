@@ -1,9 +1,9 @@
 from setuptools import setup
 
 install_dependencies = [
-      'numpy >= 1.18',
-      'pandas >= 1.0',
-      'geopandas >= 0.7'
+      'numpy == 1.*',
+      'pandas == 1.*',
+      'geopandas == 0.*'
 ]
 
 test_dependencies = [
@@ -11,7 +11,7 @@ test_dependencies = [
 ]
 
 setup(name='gdutils',
-      version='0.0.1',
+      version='1.0.0',
       description='A collection of geodata tools',
       url='https://github.com/KeiferC/gdutils',
       author='@KeiferC',

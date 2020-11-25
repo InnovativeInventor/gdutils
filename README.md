@@ -19,7 +19,7 @@ Available modules:
 
 ## Installation
 ```bash
-$ conda install fiona shapely pyproj rtree
+$ conda install fiona shapely pyproj rtree && pip3 install wheel
 $ pip3 install git+https://github.com/mggg/gdutils.git
 ```
 
@@ -32,6 +32,3 @@ To uninstall, run `pip3 uninstall gdutils`.
 Documentation can be found on [Read the Docs](https://gdutils.readthedocs.io/).
 Additionally, documentation for modules can be found using the `python` 
 `help()` function, e.g. `import gdutils.datamine; help(gdutils.datamine)`.
-
-
-

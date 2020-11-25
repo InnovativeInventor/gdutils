@@ -4,7 +4,7 @@ Installation Guide
 To install ``gdutils`` package, run the following ``pip3`` command:
 ::
 
-    $ conda install fiona shapely pyproj rtree
+    $ conda install fiona shapely pyproj rtree && pip3 install wheel
     $ pip3 install git+https://github.com/mggg/gdutils.git
 
 
