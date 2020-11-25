@@ -24,7 +24,6 @@ following commands:
     $ cd gdutils
     $ conda install fiona shapely pyproj rtree
     $ pip3 install --upgrade pip
-    $ pip3 install -r requirements.txt
     $ python3 setup.py bdist_wheel
     $ pip3 install dist/*.whl
 
