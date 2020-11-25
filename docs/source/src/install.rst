@@ -1,10 +1,11 @@
 Installation Guide
 ==================
 
-To install ``gdutils`` package, run the following ``pip`` command:
+To install ``gdutils`` package, run the following ``pip3`` command:
 ::
 
-    $ pip install git+https://github.com/mggg/gdutils.git
+    $ conda install fiona shapely pyproj rtree
+    $ pip3 install git+https://github.com/mggg/gdutils.git
 
 
 Manual Installation
@@ -21,14 +22,16 @@ following commands:
 ::
     
     $ cd gdutils
-    $ pip install --upgrade pip
-    $ python setup.py bdist_wheel
-    $ pip install dist/*.whl
+    $ conda install fiona shapely pyproj rtree
+    $ pip3 install --upgrade pip
+    $ pip3 install -r requirements.txt
+    $ python3 setup.py bdist_wheel
+    $ pip3 install dist/*.whl
 
 Alternatively, if you have a \*nix OS, you can install dependencies and
 a local build using ``make``. 
 
 If you only wish to use the ``gdutils`` module in a specific project directory,
 clone the ``gdutils`` repository into your project directory and install 
-dependencies running ``pip install -r requirements.txt`` inside the cloned
+dependencies running ``pip3 install -r requirements.txt`` inside the cloned
 directory.
