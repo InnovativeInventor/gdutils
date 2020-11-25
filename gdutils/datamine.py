@@ -122,6 +122,7 @@ def clone_gh_repos(account: str,
                    account_type: str,
                    repos: Optional[List[str]] = None,
                    outpath: Optional[Union[str, pathlib.Path]] = None
+                   shallow: bool = True
                    ) -> NoReturn:
     """
     Clones public GitHub repositories into the given directory. If
@@ -140,6 +141,9 @@ def clone_gh_repos(account: str,
     outpath : str | pathlib.Path, optional, default = ``None``
         Path to which repos are to be cloned. If not specified, clones
         repos into current working directory.
+    shallow : bool | optional, default = ``True``
+        Determines whether the clone will be shallow or not. If not specified,
+        defaults to a shallow git clone.
     
     Raises
     ------
@@ -165,17 +169,19 @@ def clone_gh_repos(account: str,
     >>> datamine.clone_repos('octocat', 'users', outpath='cloned-repos/')
     # clones all repos of 'octocat' into directory 'cloned-repos/'
 
+    >>> datamine.clone_repos('octocat', 'users', outpath='cloned-repos/', shallow = False)
+    # deep clones all repos of 'octocat' into directory 'cloned-repos/'
     """
     try:
         if repos is None:
             queried_repos = [repo for _, repo 
                                   in list_gh_repos(account, account_type)]
-            cmds = __generate_clone_cmds(queried_repos, outpath)
+            cmds = __generate_clone_cmds(queried_repos, outpath, shallow=shallow)
 
         else:
             repo_urls = [__create_gh_repo_url(account, rname) 
                             for rname in repos]
-            cmds = __generate_clone_cmds(repo_urls, outpath)
+            cmds = __generate_clone_cmds(repo_urls, outpath, shallow=shallow)
 
         responses = list(map(lambda cmd : subprocess.run(cmd), cmds))
 
@@ -376,7 +382,7 @@ def get_keys_by_category(dictionary: Dict[Hashable, List[Iterable]],
 def __generate_clone_cmds(
         repos: Optional[Union[Dict[str, str], List[str]]] = None,
         dirpath: Optional[Union[str, pathlib.Path]] = None,
-        shallow = True
+        shallow: bool = True
         ) -> List[str]:
     """
     Given a list of repos, returns a list of subprocess-valid 
