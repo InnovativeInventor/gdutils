@@ -121,7 +121,7 @@ def list_gh_repos(account: str, account_type: str) -> List[Tuple[str, str]]:
 def clone_gh_repos(account: str,
                    account_type: str,
                    repos: Optional[List[str]] = None,
-                   outpath: Optional[Union[str, pathlib.Path]] = None
+                   outpath: Optional[Union[str, pathlib.Path]] = None,
                    shallow: bool = True
                    ) -> NoReturn:
     """
