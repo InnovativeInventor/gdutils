@@ -11,8 +11,10 @@ Metadata
 :Filename:      `datamine.py <https://github.com/mggg/gdutils/>`_
 :Author:        `@KeiferC <https://github.com/keiferc>`_
 :Date:          27 July 2020
-:Version:       1.0.0
+:Version:       1.1.0
 :Description:   Module for data mining
+:Contributors:  `@InnovativeInventor <https://github.com/InnovativeInventor>`_
+
 
 Documentation
 -------------
@@ -30,13 +32,14 @@ Additionally, documentation can be found on `Read the Docs
 import json
 import os
 import pathlib
+import requests
 import subprocess
 import sys
 import urllib.parse
+
 from typing import (Dict, Hashable, Iterable, List, NoReturn, Optional, Tuple,
                     Union)
 
-import requests
 
 #########################################
 #                                       #
@@ -169,8 +172,10 @@ def clone_gh_repos(account: str,
     >>> datamine.clone_repos('octocat', 'users', outpath='cloned-repos/')
     # clones all repos of 'octocat' into directory 'cloned-repos/'
 
-    >>> datamine.clone_repos('octocat', 'users', outpath='cloned-repos/', shallow = False)
+    >>> datamine.clone_repos('octocat', 'users', outpath='cloned-repos/', 
+    ...                      shallow=False)
     # deep clones all repos of 'octocat' into directory 'cloned-repos/'
+    
     """
     try:
         if repos is None:
@@ -405,10 +410,7 @@ def __generate_clone_cmds(
             for cmd in cmds]
 
     if shallow:
-        [cmd.extend(["--depth", "1"]) for cmd in cmds]
-
-        # switch over to this once main becomes the default branch
-        # [cmd.extend(["--depth", "1", "--branch", "main", "--single-branch")] 
+        [cmd.extend(['--depth', '1']) for cmd in cmds] 
 
     return cmds
     
