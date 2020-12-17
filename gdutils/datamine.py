@@ -30,15 +30,13 @@ Additionally, documentation can be found on `Read the Docs
 import json
 import os
 import pathlib
-import requests
 import subprocess
 import sys
 import urllib.parse
+from typing import (Dict, Hashable, Iterable, List, NoReturn, Optional, Tuple,
+                    Union)
 
-from typing import (Dict, Hashable, Iterable, List, NoReturn, 
-                    Optional, Tuple, Union)
-
-
+import requests
 
 #########################################
 #                                       #
@@ -123,7 +121,8 @@ def list_gh_repos(account: str, account_type: str) -> List[Tuple[str, str]]:
 def clone_gh_repos(account: str,
                    account_type: str,
                    repos: Optional[List[str]] = None,
-                   outpath: Optional[Union[str, pathlib.Path]] = None
+                   outpath: Optional[Union[str, pathlib.Path]] = None,
+                   shallow: bool = True
                    ) -> NoReturn:
     """
     Clones public GitHub repositories into the given directory. If
@@ -142,6 +141,9 @@ def clone_gh_repos(account: str,
     outpath : str | pathlib.Path, optional, default = ``None``
         Path to which repos are to be cloned. If not specified, clones
         repos into current working directory.
+    shallow : bool | optional, default = ``True``
+        Determines whether the clone will be shallow or not. If not specified,
+        defaults to a shallow git clone.
     
     Raises
     ------
@@ -167,17 +169,19 @@ def clone_gh_repos(account: str,
     >>> datamine.clone_repos('octocat', 'users', outpath='cloned-repos/')
     # clones all repos of 'octocat' into directory 'cloned-repos/'
 
+    >>> datamine.clone_repos('octocat', 'users', outpath='cloned-repos/', shallow = False)
+    # deep clones all repos of 'octocat' into directory 'cloned-repos/'
     """
     try:
         if repos is None:
             queried_repos = [repo for _, repo 
                                   in list_gh_repos(account, account_type)]
-            cmds = __generate_clone_cmds(queried_repos, outpath)
+            cmds = __generate_clone_cmds(queried_repos, outpath, shallow=shallow)
 
         else:
             repo_urls = [__create_gh_repo_url(account, rname) 
                             for rname in repos]
-            cmds = __generate_clone_cmds(repo_urls, outpath)
+            cmds = __generate_clone_cmds(repo_urls, outpath, shallow=shallow)
 
         responses = list(map(lambda cmd : subprocess.run(cmd), cmds))
 
@@ -377,7 +381,8 @@ def get_keys_by_category(dictionary: Dict[Hashable, List[Iterable]],
 
 def __generate_clone_cmds(
         repos: Optional[Union[Dict[str, str], List[str]]] = None,
-        dirpath: Optional[Union[str, pathlib.Path]] = None
+        dirpath: Optional[Union[str, pathlib.Path]] = None,
+        shallow: bool = True
         ) -> List[str]:
     """
     Given a list of repos, returns a list of subprocess-valid 
@@ -398,6 +403,12 @@ def __generate_clone_cmds(
     if dirpath is not None:
         [cmd.append(os.path.join(dirpath, __get_repo_name(cmd[2]))) 
             for cmd in cmds]
+
+    if shallow:
+        [cmd.extend(["--depth", "1"]) for cmd in cmds]
+
+        # switch over to this once main becomes the default branch
+        # [cmd.extend(["--depth", "1", "--branch", "main", "--single-branch")] 
 
     return cmds
     
