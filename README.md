@@ -15,18 +15,33 @@ Available modules:
 ## Requirements
 - Python3
 - pip3
-- conda
 
 ## Installation
 ```bash
-$ conda install fiona shapely pyproj rtree && pip3 install wheel
 $ pip3 install git+https://github.com/mggg/gdutils.git
 ```
 
 To uninstall, run `pip3 uninstall gdutils`.
 
-*Note:* It is not possible to install `geopandas` using `pip3` alone. Please see
-[installing `geopandas`](https://geopandas.org/install.html) for more details.
+*Troubleshooting:* If installation problems, it may be due to issues with
+`geopandas`' dependencies. Please see [installing `geopandas`](https://geopandas.org/install.html) for more details.
+
+
+## Development
+To install manually:
+
+```bash
+$ git clone https://github.com/mggg/gdutils.git
+$ cd gdutils
+$ python3 -m venv venv # we recommend using a virtual environment
+$ source venv/bin/activate
+$ make install
+$ make clean
+```
+
+To run automated tests, run `pytest`.
+
+To uninstall, run `pip3 uninstall gdutils`.
 
 ## Documentation
 Documentation can be found on [Read the Docs](https://gdutils.readthedocs.io/).
