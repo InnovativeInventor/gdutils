@@ -11,7 +11,7 @@ import gdutils.datamine as dm
 # Regression Test Inputs                #
 #########################################
 
-standards_path = 'scripts/naming_convention.json'
+standards_path = './docs/source/src/examples/naming_convention.json'
 
 gh_user = 'octocat'
 gh_acct_type = 'users'

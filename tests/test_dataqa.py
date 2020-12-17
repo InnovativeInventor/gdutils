@@ -35,7 +35,7 @@ medsl_gdf = et.read_file(medsl_file).extract()
 medsl_df = pd.read_csv(os.path.join('tests', 'inputs', 'medsl18_ct_clean.csv'),
                                     encoding='ISO-8859-1')
 
-standards_path = 'scripts/naming_convention.json'
+standards_path = './docs/source/src/examples/naming_convention.json'
 
 
 
