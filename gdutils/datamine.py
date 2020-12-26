@@ -125,7 +125,8 @@ def clone_gh_repos(account: str,
                    account_type: str,
                    repos: Optional[List[str]] = None,
                    outpath: Optional[Union[str, pathlib.Path]] = None,
-                   shallow: bool = True
+                   shallow: bool = True,
+                   silent: bool = False
                    ) -> NoReturn:
     """
     Clones public GitHub repositories into the given directory. If
@@ -147,6 +148,9 @@ def clone_gh_repos(account: str,
     shallow : bool | optional, default = ``True``
         Determines whether the clone will be shallow or not. If not specified,
         defaults to a shallow git clone.
+    silent : bool | optional, default = ``False``
+        Determines whether the clone will be silent or not. If not specified,
+        defaults to a loud git clone.
     
     Raises
     ------
@@ -176,6 +180,9 @@ def clone_gh_repos(account: str,
     ...                      shallow=False)
     # deep clones all repos of 'octocat' into directory 'cloned-repos/'
     
+    >>> datamine.clone_repos('octocat', 'users', outpath='cloned-repos/', 
+    ...                      silent=True)
+    # silently deep clones all repos of 'octocat' into directory 'cloned-repos/'
     """
     try:
         if repos is None:
@@ -188,7 +195,10 @@ def clone_gh_repos(account: str,
                             for rname in repos]
             cmds = __generate_clone_cmds(repo_urls, outpath, shallow=shallow)
 
-        responses = list(map(lambda cmd : subprocess.run(cmd), cmds))
+        if silent:
+            responses = list(map(lambda cmd : subprocess.run(cmd, stderr=open(os.devnull, 'wb'), stdout=open(os.devnull, 'wb')), cmds))
+        else:
+            responses = list(map(lambda cmd : subprocess.run(cmd), cmds))
 
         for res in responses:
             if res.returncode != 0:
